@@ -9,50 +9,103 @@
 </kbd>
 </div>
 
-## What is Flattr
-Flattr: is a lightweight, open-source Python library designed to solve the problem of feeding large, multi-file codebases to Large Language Models (LLMs). It converts any Git repository or local folder into a single, clean, highly structured Markdown file, optimized for the LLM's context window.Stop manually copying files and wasting tokens on logs and binaries—give your LLM the perfect context every time.✨ FeaturesRepo Ingestion: Accepts both GitHub URLs (clones automatically) and local file paths.Intelligent Filtering: Automatically parses .gitignore and ignores common non-source files (logs, images, binaries, dependency folders, etc.) to ensure Token Efficiency.Structured Output: Generates a single .md file with clear Markdown headers to delineate directories and file boundaries, providing essential Semantic Understanding.LLM-Ready Format: Uses code fences (```language) to clearly separate code, making it easy for the model to parse syntax and file locations.🚀 InstallationFlattr is a Python package. We recommend installing it within a virtual environment.# 1. Clone the Flattr repository (for development/latest version)
-git clone https://github.com/your-username/flattr.git
-cd flattr
+Here’s a draft **README.md** for your Python library **Flattr**, which flattens GitHub repositories into a single Markdown file:
 
-## How To
+---
+
+# Flattr
+
+**Flattr** is a Python library that takes any GitHub repository and creates a **flat Markdown (`.md`) file** containing the entire codebase and documentation. It is designed to make codebases **easier to read, analyze, and feed into LLMs** for tasks like code explanation, summarization, and interactive documentation.
+
+---
+
+## Features
+
+* Fetch any public GitHub repository by URL.
+* Flatten repository structure into a single Markdown file.
+* Preserve folder and file hierarchy using Markdown headers.
+* Wrap code in fenced code blocks with syntax highlighting.
+* Include README and inline documentation.
+* Optional metadata: file size, lines of code, last commit info.
+
+---
+
+## Installation
+
 ```bash
 pip install flattr
 ```
 
-### OR for local development:
-# pip install -r requirements.txt
-💡 UsageThe primary function of Flattr is simple: generate the context file.Command Line Interface (CLI)Use the flattr command followed by the repository URL or local path.Example 1: Generating context from a GitHub URLflattr https://github.com/owner/repository-name.git --output codebase.md
-Example 2: Generating context from a local directoryflattr ./my-local-project/ --output local_context.md
-Python Library UsageYou can also import and use the core function within your own Python scripts:import flattr
+---
 
-## Generate a context file from a URL
-flattr.generate_context(
-    source="https://github.com/owner/repository-name.git",
-    output_file="flattr_context.md",
-    # Optional: include specific extensions to override filtering
-    include_extensions=[".py", ".ts"] 
-)
+## Usage
 
-print("Context file generated successfully!")
-⚙️ Output Structure (What the LLM Sees)The generated Markdown file provides a clean roadmap for the LLM:# Project Name: MyAwesomeProject
-## Repository Summary
-* Source: https://github.com/owner/repository-name.git
-* Total Files Parsed: 12
-
-# FILE: /src/core/api_service.py
 ```python
-import requests
-# Code for API service here...
-FILE: /src/ui/button.tsx// React component code for Button
-const Button = () => { /* ... */ };
+from flattr import Flattr
 
-## 🌟 Future Vision
+# Create a flat Markdown from a GitHub repo
+repo_url = "https://github.com/user/example-repo"
+flattener = Flattr(repo_url)
+flattener.generate_md("output.md")
+```
 
-The true power of Flattr lies in its potential to enable advanced LLM-powered developer tools:
-
-* **"Talk to Code" Interactive Shell:** By using the generated flat file as a system prompt, developers can initiate a long-running, deep-context chat session where the LLM acts as an **Architectural Advisor** for the entire codebase.
-* **CI/CD Documentation:** Integration into pipelines to automatically update `README.md` files or generate architectural summaries based on the most recent flattened codebase.
-* **Advanced Code Analysis:** Leverage the structured context for automated **Code Style Enforcement** and natural language **Dependency Mapping**.
+This generates a **self-contained Markdown file** with all code, docs, and structure from the repo.
 
 ---
-*License: MIT | Contribution guidelines and issue reporting are welcome.*
+
+## Example Output
+
+````markdown
+# Repository: ExampleRepo
+
+## Folder: utils
+
+### File: helpers.py
+```python
+def helper_function(x):
+    return x * 2
+````
+
+### File: validators.py
+
+```python
+def validate(input):
+    return input is not None
+```
+
+## Folder: main
+
+### File: app.py
+
+```python
+from utils.helpers import helper_function
+```
+
+```
+
+---
+
+## Future Applications
+
+- **Talk to Code**: Feed the flattened Markdown to LLMs for interactive code exploration and explanations.
+- **Interactive README files**: Automatically generate detailed, readable documentation for any repository.
+- **Knowledge Base Integration**: Ingest codebases into RAG pipelines for searchable, semantic documentation.
+- **Automated Analysis**: Summarize, refactor, or detect issues across entire projects using AI models.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to submit issues or pull requests for new features, bug fixes, or multi-language support.
+
+---
+
+## License
+
+MIT License – see [LICENSE](LICENSE) for details.
+
+---
+
+If you want, I can also **draft the initial Python library structure and starter code** for Flattr so you can have a working prototype ready to generate Markdown from GitHub repos. Do you want me to do that?
+```
+
