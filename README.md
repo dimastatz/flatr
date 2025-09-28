@@ -120,10 +120,6 @@ Contributions are welcome! Feel free to submit issues or pull requests for new f
 
 MIT License – see [LICENSE](LICENSE) for details.
 
----
 
-I can also **draft a visual workflow diagram** showing how a GitHub repo gets transformed into a flattened Markdown file, which would make this README even more compelling.  
-
-Do you want me to do that?
 
 
