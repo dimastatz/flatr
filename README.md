@@ -15,6 +15,25 @@
 
 ---
 
+## Problem Scope
+
+Modern software projects are often **spread across multiple directories and files**, making it difficult for both humans and AI models to comprehend the codebase efficiently. Large Language Models (LLMs) face these challenges:
+
+1. **Context Window Limitations** – LLMs can only process a limited amount of text at a time. Hierarchical repositories with many files make it hard for models to reason about the entire project.
+2. **Scattered Documentation** – README files and docstrings are often separate from code, creating gaps in understanding.
+3. **Navigation Complexity** – Humans also spend time jumping between folders and files to understand code dependencies.
+
+**Why Markdown is Better for LLMs:**
+
+* **Flat Structure:** All code and documentation are in a single file, making it easier for the model to process.
+* **Preserved Hierarchy via Headers:** Markdown headers (`#`, `##`, `###`) retain the logical organization of folders and files without breaking the flat flow.
+* **Syntax Awareness:** Fenced code blocks (` ```python `) preserve language context, helping LLMs understand code semantics.
+* **Human and Machine Readable:** Markdown is easy to read for developers and can be ingested directly by AI models.
+
+By converting a repository into a **flattened Markdown**, Flattr ensures that the **entire project is accessible in one coherent view**, maximizing the usefulness of LLMs and interactive tools.
+
+---
+
 ## Features
 
 * Fetch any public GitHub repository by URL.
@@ -83,10 +102,13 @@ from utils.helpers import helper_function
 
 ## Future Applications
 
-- **Talk to Code**: Feed the flattened Markdown to LLMs for interactive code exploration and explanations.
-- **Interactive README files**: Automatically generate detailed, readable documentation for any repository.
-- **Knowledge Base Integration**: Ingest codebases into RAG pipelines for searchable, semantic documentation.
-- **Automated Analysis**: Summarize, refactor, or detect issues across entire projects using AI models.
+Flattr can be used to build **interactive applications and developer tools**, including:
+
+- **Interactive README files** – Ask questions about your code or get explanations directly inside the documentation.  
+- **“Chat to Code” applications** – Use LLMs to navigate, analyze, and reason about your codebase.  
+- **Fast navigation of large codebases** – Quickly jump between functions, classes, and modules in a single Markdown file.  
+- **Knowledge base integration** – Ingest repositories into RAG pipelines for semantic search and documentation.  
+- **Automated code analysis** – Summarize, refactor, or detect issues using AI models.
 
 ---
 
@@ -102,6 +124,8 @@ MIT License – see [LICENSE](LICENSE) for details.
 
 ---
 
-If you want, I can also **draft the initial Python library structure and starter code** for Flattr so you can have a working prototype ready to generate Markdown from GitHub repos. Do you want me to do that?
+I can also **draft a visual workflow diagram** showing how a GitHub repo gets transformed into a flattened Markdown file, which would make this README even more compelling.  
+
+Do you want me to do that?
 ```
 
