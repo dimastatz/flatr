@@ -13,14 +13,6 @@
 
 **Flattr** is a Python library that takes any GitHub repository and creates a **flat Markdown (`.md`) file** containing the entire codebase and documentation. It is designed to make codebases **easier to read, analyze, and feed into LLMs** for tasks like code explanation, summarization, and interactive documentation.
 
-```mermaid
-    A[GitHub Repository] --> B[Source Files (Code, Docs, Notes)]
-    B --> C[Build / Export Script]
-    C --> D[Markdown Processor (e.g., Pandoc, custom script)]
-    D --> E[Flattened Markdown File]
-    E --> F[Ready for README, Docs, or Publishing]
-```
-
 ---
 
 ## Problem Scope
