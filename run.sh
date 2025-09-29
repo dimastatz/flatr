@@ -20,15 +20,24 @@ elif [ $1 = "-local" ]; then
     pip install --upgrade pip
     pip install -r ./requirements.txt
 
-    black whisperflow tests
-    pylint --fail-under=9.9 whisperflow tests
-    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov whisperflow -v tests
+    black flattr tests
+    pylint --fail-under=9.9 flattr tests
+    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov flattr -v tests
 elif [ $1 = "-test" ]; then
     trap 'abort' 0
     set -e
     
     echo "Running format, linter and tests"
     source .venv/bin/activate
-    black whisperflow tests
-    pylint --fail-under=9.9 whisperflow tests
-    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov --log-cli-level=INFO whisperflow -v tests
+    black flattr tests
+    pylint --fail-under=9.9 flattr tests
+    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov --log-cli-level=INFO flattr -v tests
+
+else
+  echo "Wrong argument is provided. Usage:
+    1. '-local' to build local environment
+    3. '-test' to run linter, formatter and tests"
+fi
+
+trap : 0
+echo >&2 '*** DONE ***'
