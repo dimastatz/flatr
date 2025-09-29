@@ -1,6 +1,6 @@
 <div align="center">
 <h1 align="center"> Flattr </h1> 
-<h3>latten GitHub Repos into Markdown for LLM-Friendly Code Exploration</br></h3>
+<h3>Flatten GitHub Repos into Markdown for LLM-Friendly Code Exploration</br></h3>
 <img src="https://img.shields.io/badge/Progress-10%25-red"> <img src="https://img.shields.io/badge/Feedback-Welcome-green">
 </br>
 </br>
