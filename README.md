@@ -5,7 +5,7 @@
 </br>
 </br>
 <kbd>
-<img src="https://github.com/dimastatz/flattr/blob/main/flattr_logo.png?raw=true" width="256px"> 
+<img src="https://github.com/dimastatz/flattr/blob/main/docs/flattr_logo.png?raw=true" width="256px"> 
 </kbd>
 </div>
 
