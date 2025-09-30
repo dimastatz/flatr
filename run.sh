@@ -32,7 +32,13 @@ elif [ $1 = "-test" ]; then
     black flattr tests
     pylint --fail-under=9.9 flattr tests
     pytest --ignore=tests/benchmark --cov-fail-under=95 --cov --log-cli-level=INFO flattr -v tests
-
+elif [ $1 = "-docker" ]; then
+    echo "Building and running docker image"
+    docker stop flattr-container
+    docker rm flattr-container
+    docker rmi flattr-image
+    # build docker
+    docker build --tag flattr-image --build-arg CACHEBUST=$(date +%s) . --file Dockerfile.test
 else
   echo "Wrong argument is provided. Usage:
     1. '-local' to build local environment
