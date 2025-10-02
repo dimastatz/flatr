@@ -39,6 +39,17 @@ elif [ $1 = "-docker" ]; then
     docker rmi flattr-image
     # build docker
     docker build --tag flattr-image --build-arg CACHEBUST=$(date +%s) . --file Dockerfile.test
+elif [ $1 = "-deploy-package" ]; then
+    echo "Running WhisperFlow package setup"
+    # pip install twine
+    # pip install wheel
+    python setup.py sdist bdist_wheel
+    rm -rf .venv_test
+    python3 -m venv .venv_test
+    source .venv_test/bin/activate
+    pip install ./dist/whisperflow-0.1.0-py3-none-any.whl
+    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov whisperflow -v tests
+    # twine upload ./dist/*
 else
   echo "Wrong argument is provided. Usage:
     1. '-local' to build local environment
