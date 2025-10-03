@@ -8,7 +8,7 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name='flattr',
+    name='flatr',
     version=__version__,
     url='https://github.com/dimastatz/flattr',
     author='Dima Statz',
