@@ -47,7 +47,7 @@ elif [ $1 = "-deploy-package" ]; then
     rm -rf .venv_test
     python3 -m venv .venv_test
     source .venv_test/bin/activate
-    pip install ./dist/flatr-0.1-py3-none-any.whl
+    pip install ./dist/flatr-0.2-py3-none-any.whl
     pytest --ignore=tests/benchmark --cov-fail-under=95 --cov whisperflow -v tests
     # twine upload ./dist/*
 else
