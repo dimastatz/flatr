@@ -10,10 +10,10 @@ long_description = (this_directory / "README.md").read_text()
 setup(
     name='flatr',
     version=__version__,
-    url='https://github.com/dimastatz/flattr',
+    url='https://github.com/dimastatz/flatr',
     author='Dima Statz',
     author_email='dima.statz@gmail.com',
-    py_modules=['flattr'],
+    py_modules=['flatr'],
     python_requires=">=3.8",
     install_requires=[
         str(r)
