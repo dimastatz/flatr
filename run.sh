@@ -20,25 +20,25 @@ elif [ $1 = "-local" ]; then
     pip install --upgrade pip
     pip install -r ./requirements.txt
 
-    black flattr tests
-    pylint --fail-under=9.9 flattr tests
-    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov flattr -v tests
+    black flatr tests
+    pylint --fail-under=9.9 flatr tests
+    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov flatr -v tests
 elif [ $1 = "-test" ]; then
     trap 'abort' 0
     set -e
     
     echo "Running format, linter and tests"
     source .venv/bin/activate
-    black flattr tests
-    pylint --fail-under=9.9 flattr tests
-    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov --log-cli-level=INFO flattr -v tests
+    black flatr tests
+    pylint --fail-under=9.9 flatr tests
+    pytest --ignore=tests/benchmark --cov-fail-under=95 --cov --log-cli-level=INFO flatr -v tests
 elif [ $1 = "-docker" ]; then
     echo "Building and running docker image"
-    docker stop flattr-container
-    docker rm flattr-container
-    docker rmi flattr-image
+    docker stop flatr-container
+    docker rm flatr-container
+    docker rmi flatr-image
     # build docker
-    docker build --tag flattr-image --build-arg CACHEBUST=$(date +%s) . --file Dockerfile.test
+    docker build --tag flatr-image --build-arg CACHEBUST=$(date +%s) . --file Dockerfile.test
 elif [ $1 = "-deploy-package" ]; then
     echo "Running WhisperFlow package setup"
     pip install twine
@@ -47,7 +47,7 @@ elif [ $1 = "-deploy-package" ]; then
     rm -rf .venv_test
     python3 -m venv .venv_test
     source .venv_test/bin/activate
-    pip install ./dist/flattr-0.1-py3-none-any.whl
+    pip install ./dist/flatr-0.1-py3-none-any.whl
     pytest --ignore=tests/benchmark --cov-fail-under=95 --cov whisperflow -v tests
     # twine upload ./dist/*
 else
