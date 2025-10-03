@@ -1,6 +1,6 @@
 from pathlib import Path
 from setuptools import setup
-from flattr import __version__
+from flatr import __version__
 from pkg_resources import parse_requirements
 
 

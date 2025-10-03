@@ -1,7 +1,7 @@
 """ Tests for flattr module """
-import flattr.flattr
+import flatr.flatr
 
 
 def test_execute():
     """Tests execute function"""
-    assert flattr.flattr.execute("test") == "test"
+    assert flatr.flatr.execute("test") == "test"
