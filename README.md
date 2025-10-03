@@ -1,5 +1,5 @@
 <div align="center">
-<h1 align="center"> flatr </h1> 
+<h1 align="center"> Flatr </h1> 
 <h3>Flatten GitHub Repos into Markdown for LLM-Friendly Code Exploration</br></h3>
 <img src="https://img.shields.io/badge/Progress-10%25-red"> <img src="https://img.shields.io/badge/Feedback-Welcome-green">
 </br>
