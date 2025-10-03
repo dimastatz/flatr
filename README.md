@@ -1,17 +1,17 @@
 <div align="center">
-<h1 align="center"> Flattr </h1> 
+<h1 align="center"> flatr </h1> 
 <h3>Flatten GitHub Repos into Markdown for LLM-Friendly Code Exploration</br></h3>
 <img src="https://img.shields.io/badge/Progress-10%25-red"> <img src="https://img.shields.io/badge/Feedback-Welcome-green">
 </br>
 </br>
 <kbd>
-<img src="https://github.com/dimastatz/flattr/blob/main/docs/flattr_logo.png?raw=true" width="256px"> 
+<img src="https://github.com/dimastatz/flatr/blob/main/docs/flatr_logo.png?raw=true" width="256px"> 
 </kbd>
 </div>
 
-# Flattr
+# flatr
 
-**Flattr** is a Python library that takes any GitHub repository and creates a **flat Markdown (`.md`) file** containing the entire codebase and documentation. It is designed to make codebases **easier to feed into LLMs** for tasks like code explanation, summarization, and interactive documentation.
+**flatr** is a Python library that takes any GitHub repository and creates a **flat Markdown (`.md`) file** containing the entire codebase and documentation. It is designed to make codebases **easier to feed into LLMs** for tasks like code explanation, summarization, and interactive documentation.
 
 ---
 
@@ -30,7 +30,7 @@ Modern software projects are often **spread across multiple directories and file
 * **Syntax Awareness:** Fenced code blocks (` ```python `) preserve language context, helping LLMs understand code semantics.
 * **Human and Machine Readable:** Markdown is easy to read for developers and can be ingested directly by AI models.
 
-By converting a repository into a **flattened Markdown**, Flattr ensures that the **entire project is accessible in one coherent view**, maximizing the usefulness of LLMs and interactive tools.
+By converting a repository into a **flattened Markdown**, flatr ensures that the **entire project is accessible in one coherent view**, maximizing the usefulness of LLMs and interactive tools.
 
 ---
 
@@ -48,7 +48,7 @@ By converting a repository into a **flattened Markdown**, Flattr ensures that th
 ## Installation
 
 ```bash
-pip install flattr
+pip install flatr
 ```
 
 ---
@@ -56,11 +56,11 @@ pip install flattr
 ## Usage
 
 ```python
-from flattr import Flattr
+from flatr import flatr
 
 # Create a flat Markdown from a GitHub repo
 repo_url = "https://github.com/user/example-repo"
-flattener = Flattr(repo_url)
+flattener = flatr(repo_url)
 flattener.generate_md("output.md")
 ```
 
@@ -100,7 +100,7 @@ from utils.helpers import helper_function
 
 ## Future Applications
 
-Flattr can be used to build **interactive applications and developer tools**, including:
+flatr can be used to build **interactive applications and developer tools**, including:
 
 - **Interactive README files** – Ask questions about your code or get explanations directly inside the documentation.  
 - **“Chat to Code” applications** – Use LLMs to navigate, analyze, and reason about your codebase.  
