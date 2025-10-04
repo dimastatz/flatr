@@ -7,7 +7,7 @@
 <img src="https://github.com/dimastatz/flatr/blob/main/docs/flatr_logo.png?raw=true" width="256px"> 
 </div>
 
-# flatr
+# Flatr
 
 **flatr** is a Python library that takes any GitHub repository and creates a **flat Markdown (`.md`) file** containing the entire codebase and documentation. It is designed to make codebases **easier to feed into LLMs** for tasks like code explanation, summarization, and interactive documentation.
 
