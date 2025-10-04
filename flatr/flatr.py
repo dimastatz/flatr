@@ -3,6 +3,7 @@ import os
 import shutil
 import tempfile
 import zipfile
+import typing
 import requests as r
 
 
@@ -39,3 +40,35 @@ def unzip(zip_path: str) -> str:
     with zipfile.ZipFile(zip_path) as zip_ref:
         zip_ref.extractall(extract_path)
     return extract_path
+
+
+def find_files(directory: str) -> typing.List[str]:
+    """Find all code and readme files in directory"""
+    code_extensions = {
+        ".py",
+        ".js",
+        ".java",
+        ".cpp",
+        ".h",
+        ".cs",
+        ".go",
+        ".rs",
+        ".php",
+        ".rb",
+        ".swift",
+        ".kt",
+        ".ts",
+        ".html",
+        ".css",
+    }
+    readme_patterns = {"readme", "README"}
+
+    results = []
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if os.path.splitext(file)[1] in code_extensions or any(
+                p in file.lower() for p in readme_patterns
+            ):
+                results.append(os.path.join(root, file))
+
+    return sorted(results)
