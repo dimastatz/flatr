@@ -1,5 +1,6 @@
 """ Flattens github repo """
 import os
+import shutil
 import tempfile
 import requests as r
 
@@ -19,6 +20,12 @@ def download(url: str) -> str:
             file.write(req.raise_for_status() or req.content)
 
     return zip_path
+
+
+def cleanup(file_path: str) -> None:
+    """Removes file and its parent directory"""
+    parent = os.path.dirname(file_path)
+    shutil.rmtree(parent)
 
 
 def execute(url: str) -> str:
