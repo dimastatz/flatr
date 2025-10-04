@@ -7,13 +7,13 @@
 <img src="https://github.com/dimastatz/flatr/blob/main/docs/flatr_logo.png?raw=true" width="256px"> 
 </div>
 
-# Flatr
+# 📦 Flatr
 
 **flatr** is a Python library that takes any GitHub repository and creates a **flat Markdown (`.md`) file** containing the entire codebase and documentation. It is designed to make codebases **easier to feed into LLMs** for tasks like code explanation, summarization, and interactive documentation.
 
 ---
 
-## Problem Scope
+## 🎯 Problem Scope
 
 Modern software projects are often **spread across multiple directories and files**, making it difficult for both humans and AI models to comprehend the codebase efficiently. Large Language Models (LLMs) face these challenges:
 
@@ -32,7 +32,7 @@ By converting a repository into a **flattened Markdown**, flatr ensures that the
 
 ---
 
-## Features
+## ⚡ Features
 
 * Fetch any public GitHub repository by URL.
 * Flatten repository structure into a single Markdown file.
@@ -43,7 +43,7 @@ By converting a repository into a **flattened Markdown**, flatr ensures that the
 
 ---
 
-## Installation
+## 🚀 Installation
 
 ```bash
 pip install flatr
@@ -51,7 +51,7 @@ pip install flatr
 
 ---
 
-## Usage
+## 💻 Usage
 
 ```python
 from flatr import flatr
@@ -96,7 +96,7 @@ from utils.helpers import helper_function
 
 ---
 
-## Future Applications
+## 🔮 Future Applications
 
 flatr can be used to build **interactive applications and developer tools**, including:
 
@@ -108,13 +108,13 @@ flatr can be used to build **interactive applications and developer tools**, inc
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Feel free to submit issues or pull requests for new features, bug fixes, or multi-language support.
 
 ---
 
-## License
+## 📄 License
 
 MIT License – see [LICENSE](LICENSE) for details.
 
