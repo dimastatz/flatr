@@ -74,9 +74,11 @@ def find_files(directory: str) -> typing.List[str]:
     return sorted(results)
 
 
-def write_markdown(files: list, output_path: str) -> None:
+def write_markdown(files: list, title: str, output_path: str) -> None:
     """Writes file contents to markdown file"""
     with open(output_path, "w", encoding="utf-8") as out:
+        out.write(f"\n# Repo: {title}\n\n")
+
         for file_path in files:
             # Get relative path for header
             filename = os.path.basename(file_path)

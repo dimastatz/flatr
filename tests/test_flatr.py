@@ -7,7 +7,8 @@ def test_execute():
     """Tests execute function"""
     assert flatr.flatr.execute("test") == "test"
 
-    zip_file = flatr.flatr.download("https://github.com/dimastatz/flatr.git")
+    repo_url = "https://github.com/dimastatz/flatr.git"
+    zip_file = flatr.flatr.download(repo_url)
     assert zip_file.endswith(".zip")
 
     extract_path = flatr.flatr.unzip(zip_file)
@@ -19,7 +20,7 @@ def test_execute():
     assert any(f.endswith(".py") for f in files)
 
     markdown_path = os.path.join(extract_path, "output.md")
-    flatr.flatr.write_markdown(files, markdown_path)
+    flatr.flatr.write_markdown(files, repo_url, markdown_path)
     assert os.path.exists(markdown_path)
 
     # Cleanup
