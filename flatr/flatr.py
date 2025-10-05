@@ -8,16 +8,16 @@ import typing
 import requests as r
 
 
-def download(url: str) -> str:
+def download(repo_url: str) -> str:
     """Downloads GitHub repo as zip and extracts it
     example url: https://github.com/dimastatz/whisper-flow.git
     downloaded artifact is: https://github.com/dimastatz/whisper-flow/archive/refs/heads/main.zip
     """
-    repo_name = url.split("/")[-1].removesuffix(".git")
-    url = url.removesuffix(".git") + "/archive/refs/heads/main.zip"
+    repo_name = repo_url.split("/")[-1].removesuffix(".git")
+    repo_url = repo_url.removesuffix(".git") + "/archive/refs/heads/main.zip"
     zip_path = os.path.join(tempfile.mkdtemp(), f"{repo_name}.zip")
 
-    with r.get(url, timeout=120) as req:
+    with r.get(repo_url, timeout=120) as req:
         with open(zip_path, "wb") as file:
             file.write(req.raise_for_status() or req.content)
 
@@ -92,16 +92,8 @@ def write_markdown(files: list, title: str, output_path: str) -> None:
             out.write("\n````\n")
 
 
-def main():  # pragma: no cover
+def main(repo_url: str, repo_name: str, output_md: str):  # pragma: no cover
     """Run all flow"""
-    if len(sys.argv) != 2:
-        print("Usage: python -m flatr <github_repo_url>")
-        sys.exit(1)
-
-    repo_url = sys.argv[1]
-    repo_name = repo_url.rstrip("/").split("/")[-1].removesuffix(".git")
-    output_md = f"{repo_name}.md"
-
     print(f"Downloading {repo_url} ...")
     zip_path = download(repo_url)
     print(f"Extracting {zip_path} ...")
@@ -116,4 +108,11 @@ def main():  # pragma: no cover
 
 
 if __name__ == "__main__":  # pragma: no cover
-    main()
+    if len(sys.argv) != 2:
+        print("Usage: python -m flatr <github_repo_url>")
+        sys.exit(1)
+    url = sys.argv[1]
+    name = url.rstrip("/").split("/")[-1].removesuffix(".git")
+    md = f"{name}.md"
+
+    main(url, name, md)
