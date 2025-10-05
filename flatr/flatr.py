@@ -1,5 +1,6 @@
 """ Flattens github repo """
 import os
+import sys
 import shutil
 import tempfile
 import zipfile
@@ -89,3 +90,30 @@ def write_markdown(files: list, title: str, output_path: str) -> None:
                 out.write(file.read())
 
             out.write("\n````\n")
+
+
+def main():  # pragma: no cover
+    """Run all flow"""
+    if len(sys.argv) != 2:
+        print("Usage: python -m flatr <github_repo_url>")
+        sys.exit(1)
+
+    repo_url = sys.argv[1]
+    repo_name = repo_url.rstrip("/").split("/")[-1].removesuffix(".git")
+    output_md = f"{repo_name}.md"
+
+    print(f"Downloading {repo_url} ...")
+    zip_path = download(repo_url)
+    print(f"Extracting {zip_path} ...")
+    extract_dir = unzip(zip_path)
+    print(f"Finding files in {extract_dir} ...")
+    files = find_files(extract_dir)
+    print(f"Writing markdown to {output_md} ...")
+    write_markdown(files, repo_name, output_md)
+    print("Cleaning up ...")
+    cleanup(zip_path)
+    print(f"Done! Markdown file created: {output_md}")
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()
