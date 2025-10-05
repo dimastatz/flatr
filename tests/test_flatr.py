@@ -5,8 +5,6 @@ import flatr.flatr
 
 def test_execute():
     """Tests execute function"""
-    assert flatr.flatr.execute("test") == "test"
-
     repo_url = "https://github.com/dimastatz/flatr.git"
     zip_file = flatr.flatr.download(repo_url)
     assert zip_file.endswith(".zip")

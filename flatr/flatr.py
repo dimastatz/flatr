@@ -29,11 +29,6 @@ def cleanup(file_path: str) -> None:
     shutil.rmtree(parent)
 
 
-def execute(url: str) -> str:
-    """Main functions"""
-    return url
-
-
 def unzip(zip_path: str) -> str:
     """Extracts zip file to a new directory next to it"""
     extract_path = os.path.splitext(zip_path)[0]
