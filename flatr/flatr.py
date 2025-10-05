@@ -70,10 +70,44 @@ def find_files(directory: str) -> typing.List[str]:
     return sorted(results)
 
 
-def write_markdown(files: list, title: str, output_path: str) -> None:
+def get_dir_structure_tree(directory: str) -> typing.List[str]:
+    """Returns a directory structure tree"""
+    tree_lines = []
+    first_iteration = 2 # Flag for skipping the first and second iteration of the loop (avoid having the top level folder name in the tree)
+    for root, dirs, files in os.walk(directory):
+        # Skipping the first and second iteration
+        if first_iteration != 0:
+            first_iteration -= 1
+            continue
+        
+        # Sort dirs and files for consistent order
+        dirs.sort()
+        files.sort()
+
+        rel_path = os.path.relpath(root, directory)
+        if rel_path == ".":
+            level = 0
+        else:
+            level = rel_path.count(os.sep) - 1 #Reducing 1 to avoid having an extra indentation, compensating for the top level folder skip
+            indent = " " * 4 * level
+            tree_lines.append(f"{indent}- {os.path.basename(root)}")
+
+        subindent = " " * 4 * (level + 1)
+        for f in files:
+            tree_lines.append(f"{subindent}- {f}")
+
+    return tree_lines
+
+
+def write_markdown(files: list, tree: list, title: str, output_path: str) -> None:
     """Writes file contents to markdown file"""
     with open(output_path, "w", encoding="utf-8") as out:
-        out.write(f"\n# Repo: {title}\n\n")
+        out.write(f"\n# Repo: {title}\n")
+
+        out.write(f"\n## Directory Structure:\n")
+        out.write("```text\n")
+        out.write("\n".join(tree))
+        out.write("\n```\n\n")
 
         for file_path in files:
             # Get relative path for header
@@ -100,8 +134,9 @@ def main(repo_url: str, repo_name: str, output_md: str):  # pragma: no cover
     extract_dir = unzip(zip_path)
     print(f"Finding files in {extract_dir} ...")
     files = find_files(extract_dir)
+    tree = get_dir_structure_tree(extract_dir)
     print(f"Writing markdown to {output_md} ...")
-    write_markdown(files, repo_name, output_md)
+    write_markdown(files, tree, repo_name, output_md)
     print("Cleaning up ...")
     cleanup(zip_path)
     print(f"Done! Markdown file created: {output_md}")
