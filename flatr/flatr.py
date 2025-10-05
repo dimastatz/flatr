@@ -72,3 +72,23 @@ def find_files(directory: str) -> typing.List[str]:
                 results.append(os.path.join(root, file))
 
     return sorted(results)
+
+
+def write_markdown(files: list, output_path: str) -> None:
+    """Writes file contents to markdown file"""
+    with open(output_path, "w", encoding="utf-8") as out:
+        for file_path in files:
+            # Get relative path for header
+            filename = os.path.basename(file_path)
+
+            # Write file header
+            out.write(f"\n## File: {filename}\n\n")
+
+            # Write file contents in code block
+            ext = os.path.splitext(filename)[1][1:] or "text"
+            out.write(f"````{ext}\n")
+
+            with open(file_path, "r", encoding="utf-8") as file:
+                out.write(file.read())
+
+            out.write("\n````\n")
