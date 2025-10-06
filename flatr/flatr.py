@@ -42,20 +42,71 @@ def find_files(directory: str) -> typing.List[str]:
     """Find all code and readme files in directory"""
     code_extensions = {
         ".py",
+        ".pyx",
+        ".pyd",
+        ".pyi",  # Python
         ".js",
+        ".jsx",
+        ".ts",
+        ".tsx",  # JavaScript/TypeScript
         ".java",
+        ".scala",
+        ".kt",
+        ".kts",  # JVM
         ".cpp",
-        ".h",
+        ".hpp",
+        ".c",
+        ".h",  # C/C++
         ".cs",
+        ".vb",
+        ".fs",  # .NET
         ".go",
         ".rs",
+        ".rb",  # Go/Rust/Ruby
         ".php",
-        ".rb",
+        ".php4",
+        ".php5",
+        ".phtml",  # PHP
         ".swift",
-        ".kt",
-        ".ts",
+        ".m",
+        ".mm",  # Apple
+        ".R",
+        ".r",  # R
+        ".sql",
+        ".mysql",
+        ".pgsql",  # SQL
+        ".sh",
+        ".bash",
+        ".zsh",  # Shell
         ".html",
+        ".htm",
         ".css",
+        ".scss",
+        ".sass",  # Web
+        ".xml",
+        ".yaml",
+        ".yml",
+        ".json",
+        ".toml",  # Config
+        ".lua",
+        ".pl",
+        ".pm",  # Lua/Perl
+        ".ex",
+        ".exs",  # Elixir
+        ".elm",
+        ".clj",
+        ".ml",  # Functional
+        ".dart",
+        ".gradle",
+        ".groovy",  # Others
+        ".f90",
+        ".f95",
+        ".f03",  # Fortran
+        ".asm",
+        ".s",  # Assembly
+        ".v",
+        ".sv",  # Verilog
+        ".mat",  # MATLAB
     }
     readme_patterns = {"readme", "README"}
 
