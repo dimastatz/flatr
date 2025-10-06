@@ -152,7 +152,7 @@ def main(repo_url: str, repo_name: str, output_md: str):  # pragma: no cover
     print(f"Finding files in {extract_dir} ...")
     files = find_files(extract_dir)
     print(f"Writing markdown to {output_md} ...")
-    write_markdown(extract_dir, files, repo_name, output_md)
+    write_markdown(extract_dir, files, repo_url, output_md)
     print("Cleaning up ...")
     cleanup(zip_path)
     print(f"Done! Markdown file created: {output_md}")
