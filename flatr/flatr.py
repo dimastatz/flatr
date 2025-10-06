@@ -121,14 +121,14 @@ def find_files(directory: str) -> typing.List[str]:
     return sorted(results)
 
 
-def write_markdown(files: list, title: str, output_path: str) -> None:
+def write_markdown(base_path: str, files: list, title: str, output_path: str) -> None:
     """Writes file contents to markdown file"""
     with open(output_path, "w", encoding="utf-8") as out:
         out.write(f"\n# Repo: {title}\n\n")
 
         for file_path in files:
             # Get relative path for header
-            filename = os.path.basename(file_path)
+            filename = os.path.relpath(file_path, base_path)
 
             # Write file header
             out.write(f"\n## File: {filename}\n\n")
@@ -152,7 +152,7 @@ def main(repo_url: str, repo_name: str, output_md: str):  # pragma: no cover
     print(f"Finding files in {extract_dir} ...")
     files = find_files(extract_dir)
     print(f"Writing markdown to {output_md} ...")
-    write_markdown(files, repo_name, output_md)
+    write_markdown(extract_dir, files, repo_name, output_md)
     print("Cleaning up ...")
     cleanup(zip_path)
     print(f"Done! Markdown file created: {output_md}")

@@ -18,7 +18,7 @@ def test_execute():
     assert any(f.endswith(".py") for f in files)
 
     markdown_path = os.path.join(extract_path, "output.md")
-    flatr.flatr.write_markdown(files, repo_url, markdown_path)
+    flatr.flatr.write_markdown(extract_path, files, repo_url, markdown_path)
     assert os.path.exists(markdown_path)
 
     # Cleanup
