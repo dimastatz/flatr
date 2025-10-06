@@ -159,7 +159,7 @@ def main(repo_url: str, repo_name: str, output_md: str):  # pragma: no cover
 
 
 if __name__ == "__main__":  # pragma: no cover
-    if len(sys.argv) != 2 or len(sys.argv) != 3:
+    if len(sys.argv) != 2 and len(sys.argv) != 3:
         print("Usage: python -m flatr <github_repo_url> [output_md_file]")
         sys.exit(1)
     url = sys.argv[1]
