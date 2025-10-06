@@ -14,7 +14,7 @@ setup(
     author='Dima Statz',
     author_email='dima.statz@gmail.com',
     py_modules=['flatr'],
-    python_requires=">=3.8",
+    python_requires=">=3.9",
     install_requires=[
         str(r)
         for r in parse_requirements(
