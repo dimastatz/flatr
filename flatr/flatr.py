@@ -108,14 +108,12 @@ def find_files(directory: str) -> typing.List[str]:
         ".sv",  # Verilog
         ".mat",  # MATLAB
     }
-    readme_patterns = {"readme", "README"}
+    # readme_patterns = {"readme", "README"}
 
     results = []
     for root, _, files in os.walk(directory):
         for file in files:
-            if os.path.splitext(file)[1] in code_extensions or any(
-                p in file.lower() for p in readme_patterns
-            ):
+            if os.path.splitext(file)[1] in code_extensions:
                 results.append(os.path.join(root, file))
 
     return sorted(results)
@@ -143,7 +141,7 @@ def write_markdown(base_path: str, files: list, title: str, output_path: str) ->
             out.write("\n````\n")
 
 
-def main(repo_url: str, repo_name: str, output_md: str):  # pragma: no cover
+def main(repo_url: str, output_md: str):  # pragma: no cover
     """Run all flow"""
     print(f"Downloading {repo_url} ...")
     zip_path = download(repo_url)
@@ -166,4 +164,4 @@ if __name__ == "__main__":  # pragma: no cover
     name = url.rstrip("/").split("/")[-1].removesuffix(".git")
     md = sys.argv[1] if len(sys.argv) == 3 else f"{name}.md"
 
-    main(url, name, md)
+    main(url, md)
