@@ -108,7 +108,7 @@ def find_files(directory: str) -> typing.List[str]:
         ".sv",  # Verilog
         ".mat",  # MATLAB
     }
-    # readme_patterns = {"readme", "README"}
+    # readme_patterns = {"readme"}
 
     results = []
     for root, _, files in os.walk(directory):
