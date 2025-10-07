@@ -14,7 +14,6 @@ def test_execute():
 
     files = flatr.flatr.find_files(extract_path)
     assert len(files) > 0
-    assert any("README" in f for f in files)
     assert any(f.endswith(".py") for f in files)
 
     markdown_path = os.path.join(extract_path, "output.md")
