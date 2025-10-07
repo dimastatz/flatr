@@ -57,9 +57,8 @@ pip install flatr
 from flatr import flatr
 
 # Create a flat Markdown from a GitHub repo
-repo_url = "https://github.com/user/example-repo"
-flattener = flatr(repo_url)
-flattener.generate_md("output.md")
+repo_url = "https://github.com/dimastatz/flatr"
+python -m flatr.flatr repo_url 
 ```
 
 This generates a **self-contained Markdown file** with all code, docs, and structure from the repo.
