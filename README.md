@@ -67,28 +67,22 @@ This generates a **self-contained Markdown file** with all code, docs, and struc
 
 ## Example Output
 
-````markdown
-# Repository: ExampleRepo
 
-## Folder: utils
+## Repository: ExampleRepo
 
-### File: helpers.py
+### File: utils/helpers.py
 ```python
 def helper_function(x):
     return x * 2
-````
+```
 
 ### File: validators.py
-
 ```python
 def validate(input):
     return input is not None
 ```
 
-## Folder: main
-
-### File: app.py
-
+### File: main/app.py
 ```python
 from utils.helpers import helper_function
 ```
