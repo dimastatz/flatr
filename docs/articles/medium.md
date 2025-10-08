@@ -31,7 +31,7 @@ It includes a lightweight command-line interface, Docker support for reproducibl
 
 ## The Ecosystem: Similar Tools
 
-Several other tools have attempted to solve similar problems. **Coderoller** focuses on summarizing repositories for AI ingestion, while **flatten-codebase** converts project structures into Markdown or JSON primarily for embedding workflows.
+Several other tools have attempted to solve similar problems. Some focuse on summarizing repositories for AI ingestion, other convert project structures into Markdown or JSON primarily for embedding workflows.
 
 Flatr takes a slightly different path — it prioritizes human readability while maintaining compatibility with LLMs. The result is an artifact that is both machine-consumable and pleasant to read.
 
