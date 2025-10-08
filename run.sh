@@ -51,12 +51,10 @@ elif [ $1 = "-deploy-package" ]; then
     pytest --ignore=tests/benchmark --cov-fail-under=95 --cov whisperflow -v tests
     # twine upload ./dist/*
 else
-  echo "
-    Wrong argument is provided. Usage:
+  echo "Wrong argument is provided. Usage:
         '-local' to build local environment
         '-test' to run linter, formatter and tests
-        '-docker' to build and run docker image
-    "
+        '-docker' to build and run docker image"
 fi
 
 trap : 0
