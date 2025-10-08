@@ -1,7 +1,7 @@
 """ Tests for flattr module """
 import os
-import flatr.flatr
 import requests
+import flatr.flatr
 
 
 def test_execute():
@@ -40,7 +40,9 @@ def test_multiple_md():
 
     # Get all content of output file to string
     with open(markdown_path, "r", encoding="utf-8") as f:
-        output_file_content = f.read().replace("\\", "/") # Added the replace function for testing on windows
+        output_file_content = f.read().replace(
+            "\\", "/"
+        )  # Added the replace function for testing on windows
 
     # Get a list of all md files from GitHub API
     url_parts = repo_url.rstrip("/").split("/")
@@ -48,11 +50,11 @@ def test_multiple_md():
     repo = url_parts[4]
 
     api_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/main?recursive=1"
-    all_files = requests.get(api_url).json()['tree']
+    all_files = requests.get(api_url, timeout=10).json()["tree"]
 
     md_files = []
     for file in all_files:
-        if file["type"] == "blob" and file['path'].endswith('.md'):
+        if file["type"] == "blob" and file["path"].endswith(".md"):
             md_files.append(file["path"])
 
     # Check if all md files exist in output
