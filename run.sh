@@ -7,9 +7,11 @@ abort()
 }
 
 if [ "$#" -eq 0 ]; then
-    echo "No arguments provided. Usage: 
-    1. '-local' to build local environment
-    2. '-test' to run local tests"
+    echo "Wrong argument is provided. Usage:
+            '-local' to build local environment
+            '-test' to run linter, formatter and tests
+            '-docker' to build and run docker image"
+
 elif [ $1 = "-local" ]; then
     trap 'abort' 0
     set -e
@@ -52,9 +54,9 @@ elif [ $1 = "-deploy-package" ]; then
     # twine upload ./dist/*
 else
   echo "Wrong argument is provided. Usage:
-        '-local' to build local environment
-        '-test' to run linter, formatter and tests
-        '-docker' to build and run docker image"
+            '-local' to build local environment
+            '-test' to run linter, formatter and tests
+            '-docker' to build and run docker image"
 fi
 
 trap : 0
