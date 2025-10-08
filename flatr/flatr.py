@@ -5,6 +5,7 @@ import shutil
 import tempfile
 import zipfile
 import typing
+import re
 import requests as r
 
 
@@ -107,6 +108,8 @@ def find_files(directory: str) -> typing.List[str]:
         ".v",
         ".sv",  # Verilog
         ".mat",  # MATLAB
+        ".txt",
+        ".md",  # Text/Markdown
     }
     # readme_patterns = {"readme"}
 
@@ -117,6 +120,28 @@ def find_files(directory: str) -> typing.List[str]:
                 results.append(os.path.join(root, file))
 
     return sorted(results)
+
+
+def count_backticks(file_path: str) -> int:
+    """
+    Checks amount of backticks in the file to not break the output markdown file,
+    returns 4 (default backticks amount) if none found or file is safe
+    """
+    with open(file_path, "r", encoding="utf-8") as file:
+        file_contents = file.read()
+
+    backticks_list = (
+        re.findall(r"`+", file_contents) or None
+    )  # Regular expression to check for one or more backticks
+    if backticks_list is None:
+        return 4
+
+    longest_occurrence = max(backticks_list, key=len)
+    backtick_count = len(longest_occurrence)
+
+    if backtick_count >= 4:
+        return backtick_count + 1
+    return 4
 
 
 def write_markdown(base_path: str, files: list, title: str, output_path: str) -> None:
@@ -133,12 +158,23 @@ def write_markdown(base_path: str, files: list, title: str, output_path: str) ->
 
             # Write file contents in code block
             ext = os.path.splitext(filename)[1][1:] or "text"
-            out.write(f"````{ext}\n")
+            if ext in (
+                "txt",
+                "md",
+            ):  # Check for text or md file in order to not break the output file format
+                backticks_amount = count_backticks(file_path)
+                out.write(f"{'`'*backticks_amount}{ext}\n")
 
-            with open(file_path, "r", encoding="utf-8") as file:
-                out.write(file.read())
+                with open(file_path, "r", encoding="utf-8") as file:
+                    out.write(file.read())
 
-            out.write("\n````\n")
+                out.write(f"\n{'`'*backticks_amount}\n")
+            else:
+                out.write(f"````{ext}\n")
+                with open(file_path, "r", encoding="utf-8") as file:
+                    out.write(file.read())
+
+                out.write("\n````\n")
 
 
 def main(repo_url: str, output_md: str):  # pragma: no cover
