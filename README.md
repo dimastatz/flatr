@@ -53,9 +53,7 @@ pip install flatr
 
 ## 💻 Usage
 
-```python
-from flatr import flatr
-
+```bash
 # Create a flat Markdown from a GitHub repo
 repo_url = "https://github.com/dimastatz/flatr"
 python -m flatr.flatr repo_url 
