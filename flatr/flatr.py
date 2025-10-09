@@ -18,7 +18,7 @@ def download(repo_url: str) -> str:
     repo_url = repo_url.removesuffix(".git") + "/archive/refs/heads/main.zip"
     zip_path = os.path.join(tempfile.mkdtemp(), f"{repo_name}.zip")
 
-    with r.get(repo_url, timeout=120) as req:
+    with r.get(repo_url, timeout=180) as req:
         with open(zip_path, "wb") as file:
             file.write(req.raise_for_status() or req.content)
 

@@ -29,7 +29,7 @@ def test_execute():
 
 def test_multiple_md():
     """Validates if all md files written to output file"""
-    repo_url = "https://github.com/dimastatz/whisper-flow"
+    repo_url = "https://github.com/dimastatz/flatr"
 
     # Execute the main function
     zip_file = flatr.flatr.download(repo_url)
