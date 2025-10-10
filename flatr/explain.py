@@ -1,4 +1,5 @@
 """Explains Codebase from Flattened Markdown"""
+import os
 import sys
 from google import genai
 from google.genai import types
@@ -7,7 +8,12 @@ import flatr
 
 def main(repo_url: str):
     """The main loop, handles interaction with an LLM model"""
-    client = genai.Client()  # Assumes that you have set the environment variable GEMINI_API_KEY
+    # Checks if the environment variable is set
+    if os.getenv("GEMINI_API_KEY") is None:
+        print("GEMINI_API_KEY environment variable not found.")
+        return
+
+    client = genai.Client()
 
     # Flatten the requested repo
     repo_name = repo_url.rstrip("/").split("/")[-1].removesuffix(".git")
