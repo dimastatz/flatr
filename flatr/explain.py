@@ -3,7 +3,9 @@ import os
 import sys
 
 
-def __main__():  # pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
+    print("flatr Explain \n")
+
     if len(sys.argv) != 2:
         print("Usage: python -m flatr.explain <github_repo_url>")
         sys.exit(1)
@@ -14,4 +16,4 @@ def __main__():  # pragma: no cover
         print("Download a GGUF model from https://huggingface.co/TheBloke")
         sys.exit(1)
 
-    # main(sys.argv[1], model_path)
+    print(f"model={model_path}")
