@@ -7,7 +7,7 @@ import flatr
 
 def main(repo_url: str):
     """The main loop, handles interaction with an LLM model"""
-    client = genai.Client()  # Create a client
+    client = genai.Client()  # Creates a client, assumes that you have set the environment variable GEMINI_API_KEY.
 
     # Flatten the requested repo
     repo_name = repo_url.rstrip("/").split("/")[-1].removesuffix(".git")
