@@ -28,7 +28,7 @@ def call_model(
 ) -> str:
     """Call the Gemini model and return its response."""
     config = {"system_instruction": system_instruction}
-    response = genai.models.generate_content(
+    response = genai.models.generate_content(  # pylint: disable=no-member
         model=model, config=config, contents=messages
     )
     return response.text if hasattr(response, "text") else str(response)
