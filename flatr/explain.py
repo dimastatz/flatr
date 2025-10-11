@@ -5,6 +5,10 @@ from google import genai
 from google.genai import types
 import flatr
 
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+from huggingface_hub import login
+import bitsandbytes as bnb
 
 def main(repo_url: str):
     """The main loop, handles interaction with an LLM model"""
