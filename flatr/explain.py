@@ -2,7 +2,7 @@
 import os
 import sys
 from typing import List, Dict, Any
-import google.generativeai as genai
+from google.genai import genai
 
 
 def read_md(md_path: str) -> str:
@@ -15,7 +15,7 @@ def build_system_instruction(md_content: str) -> str:
     """Create a system instruction to ground the LLM's answers in the Markdown."""
     return (
         "You are a Software Engineer that answers questions strictly using the provided "
-        "Markdown. Markdown contains all the source code from a specific github repo specified in this file. "
+        "Markdown. Markdown contains the source code from a github repo specified in this file. "
         "If the information is not present, say 'Information not available.' "
         "Do not hallucinate.\n\n"
         f"[CONTEXT START]\n{md_content}\n[CONTEXT END]\n\n"
