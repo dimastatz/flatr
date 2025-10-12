@@ -2,7 +2,7 @@
 import os
 import sys
 from typing import List, Dict, Any
-from google.genai import genai
+from google import genai
 
 
 def read_md(md_path: str) -> str:
@@ -22,24 +22,13 @@ def build_system_instruction(md_content: str) -> str:
     )
 
 
-def call_model(
-    system_instruction: str,
-    messages: List[Dict[str, Any]],
-    model: str = "gemini-2.5-flash-lite",
-) -> str:
-    """Call the Gemini model and return its response."""
-    config = {"system_instruction": system_instruction}
-    response = genai.models.generate_content(  # pylint: disable=no-member
-        model=model, config=config, contents=messages
-    )
-    return response.text if hasattr(response, "text") else str(response)
-
-
-def interactive_loop(md_path: str, api_key: str) -> None:
+def interactive_loop(
+    md_path: str, api_key: str, model: str = "gemini-2.5-flash-lite"
+) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
-    genai.configure(api_key=api_key)
-    md_content = read_md(md_path)
-    system_instruction = build_system_instruction(md_content)
+    client = genai.Client(api_key=api_key)
+    # md_content = read_md(md_path)
+    # system_instruction = build_system_instruction(md_content)
 
     print(f"Using Markdown file: {md_path}")
     print("Ask questions about the code (type 'exit' to quit).")
@@ -55,7 +44,10 @@ def interactive_loop(md_path: str, api_key: str) -> None:
                 continue
 
             messages.append({"role": "user", "content": [{"text": question}]})
-            answer = call_model(system_instruction, messages)
+            answer = client.models.generate_content(
+                model=model, contents=messages
+            )  # Warm up the model
+
             print("\n" + answer + "\n" + "-" * 60)
             messages.append({"role": "model", "content": [{"text": answer}]})
         except KeyboardInterrupt:
