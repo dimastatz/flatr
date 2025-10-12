@@ -71,5 +71,5 @@ def main(argv: List[str]) -> None:
     interactive_loop(md_path, api_key)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     main(sys.argv)
