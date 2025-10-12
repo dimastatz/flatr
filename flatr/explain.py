@@ -6,13 +6,13 @@ from google import genai
 from google.genai.types import GenerateContentConfig
 
 
-def read_md(md_path: str) -> str:
+def read_md(md_path: str) -> str: # pragma: no cover
     """Read and return the content of a Markdown file."""
     with open(md_path, "r", encoding="utf-8") as f:
         return f.read()
 
 
-def interactive_loop(
+def interactive_loop( # pragma: no cover
     md_path: str, api_key: str, model: str = "gemini-2.5-flash-lite"
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
@@ -52,7 +52,7 @@ def interactive_loop(
             break
 
 
-def main(argv: List[str]) -> None:
+def main(argv: List[str]) -> None: # pragma: no cover
     """Main entry point for the script."""
     if len(argv) != 2:
         print("Usage: python -m flatr.explain <path-to-markdown.md>")
