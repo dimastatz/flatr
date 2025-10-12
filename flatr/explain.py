@@ -3,6 +3,7 @@ import os
 import sys
 from typing import List, Dict, Any
 from google import genai
+from google.genai.types import GenerateContentConfig
 
 
 def read_md(md_path: str) -> str:
@@ -11,24 +12,20 @@ def read_md(md_path: str) -> str:
         return f.read()
 
 
-def build_system_instruction(md_content: str) -> str:
-    """Create a system instruction to ground the LLM's answers in the Markdown."""
-    return (
-        "You are a Software Engineer that answers questions strictly using the provided "
-        "Markdown. Markdown contains the source code from a github repo specified in this file. "
-        "If the information is not present, say 'Information not available.' "
-        "Do not hallucinate.\n\n"
-        f"[CONTEXT START]\n{md_content}\n[CONTEXT END]\n\n"
-    )
-
-
 def interactive_loop(
     md_path: str, api_key: str, model: str = "gemini-2.5-flash-lite"
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
     client = genai.Client(api_key=api_key)
-    # md_content = read_md(md_path)
-    # system_instruction = build_system_instruction(md_content)
+    md_content = read_md(md_path)
+    config = GenerateContentConfig(
+        system_instruction=[
+            "You are a Software Engineer that answers questions using the provided Markdown",
+            "Markdown contains the source code from a github repo specified in this file."
+            "If the information is missing, say 'Information not available.' Do not hallucinate.",
+            f"[CONTEXT START]\n{md_content}\n[CONTEXT END]",
+        ]
+    )  # system_instruction = build_system_instruction(md_content)
 
     print(f"Using Markdown file: {md_path}")
     print("Ask questions about the code (type 'exit' to quit).")
@@ -44,12 +41,12 @@ def interactive_loop(
                 continue
 
             messages.append({"role": "user", "content": [{"text": question}]})
-            answer = client.models.generate_content(
-                model=model, contents=messages
+            response = client.models.generate_content(
+                model=model, contents=messages, config=config
             )  # Warm up the model
 
-            print("\n" + answer + "\n" + "-" * 60)
-            messages.append({"role": "model", "content": [{"text": answer}]})
+            print("\n" + response.text + "\n" + "-" * 60)
+            messages.append({"role": "model", "content": [{"text": response.text}]})
         except KeyboardInterrupt:
             print("\nInterrupted. Exiting.")
             break
