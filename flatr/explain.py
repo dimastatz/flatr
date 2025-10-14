@@ -1,23 +1,32 @@
 """Functional Gemini-based Q&A over a Markdown file."""
 import os
 import sys
+import tempfile
+from urllib.parse import urlparse
+
 from typing import List, Dict, Any
 from google import genai
 from google.genai.types import GenerateContentConfig
 
+import flatr.flatr
 
-def read_md(md_path: str) -> str: # pragma: no cover
+
+def read_md(md_path: str) -> str:  # pragma: no cover
     """Read and return the content of a Markdown file."""
     with open(md_path, "r", encoding="utf-8") as f:
         return f.read()
 
 
-def interactive_loop( # pragma: no cover
-    md_path: str, api_key: str, model: str = "gemini-2.5-flash-lite"
+def interactive_loop(  # pragma: no cover
+    repo_url: str, api_key: str, model: str = "gemini-2.5-flash-lite"
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
     client = genai.Client(api_key=api_key)
-    md_content = read_md(md_path)
+
+    with tempfile.NamedTemporaryFile(delete=True) as temp:
+        flatr.flatr.main(repo_url=repo_url, output_md=temp.name)
+        md_content = read_md(temp.name)
+
     config = GenerateContentConfig(
         system_instruction=[
             "You are a Software Engineer that answers questions using the provided Markdown",
@@ -27,7 +36,6 @@ def interactive_loop( # pragma: no cover
         ]
     )  # system_instruction = build_system_instruction(md_content)
 
-    print(f"Using Markdown file: {md_path}")
     print("Ask questions about the code (type 'exit' to quit).")
 
     messages: List[Dict[str, Any]] = []
@@ -52,15 +60,15 @@ def interactive_loop( # pragma: no cover
             break
 
 
-def main(argv: List[str]) -> None: # pragma: no cover
+def main(argv: List[str]) -> None:  # pragma: no cover
     """Main entry point for the script."""
     if len(argv) != 2:
         print("Usage: python -m flatr.explain <path-to-markdown.md>")
         sys.exit(1)
 
-    md_path = argv[1]
-    if not os.path.exists(md_path):
-        print(f"Error: Markdown file not found at '{md_path}'")
+    url = urlparse(argv[1])
+    if not all([url.scheme in ("http", "https"), url.netloc]):
+        print(f"Error: Bad url '{url}'")
         sys.exit(1)
 
     api_key = os.getenv("GEMINI_API_KEY")
@@ -68,8 +76,8 @@ def main(argv: List[str]) -> None: # pragma: no cover
         print("Error: GEMINI_API_KEY not set. Run: export GEMINI_API_KEY=your_key")
         sys.exit(1)
 
-    interactive_loop(md_path, api_key)
+    interactive_loop(url, api_key)
 
 
-if __name__ == "__main__": # pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     main(sys.argv)
