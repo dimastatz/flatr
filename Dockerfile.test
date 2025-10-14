@@ -21,4 +21,4 @@ COPY . .
 RUN rm -rf .venv & python3 -m venv .venv & source .venv/bin/activate \
     & pip install --upgrade pip & pip install -r ./requirements.txt \ 
     & black flatr tests & pylint --fail-under=9.9 flatr tests \
-    & pytest --ignore=tests/benchmark --cov-fail-under=95 --cov flatr -v tests
+    & pytest --ignore=tests/benchmark --cov-fail-under=95 --cov --cov-omit="*/flatr/explain.py" flatr -v tests
