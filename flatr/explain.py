@@ -76,7 +76,7 @@ def main(argv: List[str]) -> None:  # pragma: no cover
         print("Error: GEMINI_API_KEY not set. Run: export GEMINI_API_KEY=your_key")
         sys.exit(1)
 
-    interactive_loop(url, api_key)
+    interactive_loop(url.geturl(), api_key)
 
 
 if __name__ == "__main__":  # pragma: no cover
