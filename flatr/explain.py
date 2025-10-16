@@ -34,7 +34,7 @@ def interactive_loop(  # pragma: no cover
             "If the information is missing, say 'Information not available.' Do not hallucinate.",
             f"[CONTEXT START]\n{md_content}\n[CONTEXT END]",
         ]
-    )  # system_instruction = build_system_instruction(md_content)
+    )
 
     print("Ask questions about the code (type 'exit' to quit).")
 
