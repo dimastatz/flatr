@@ -8,7 +8,10 @@ from typing import List
 from google import genai
 from google.genai.types import GenerateContentConfig
 
+from colorama import Fore, Style, init
 import flatr.flatr
+
+init(autoreset=True)
 
 
 def read_md(md_path: str) -> str:  # pragma: no cover
@@ -21,12 +24,16 @@ def interactive_loop(  # pragma: no cover
     repo_url: str, api_key: str, model_name: str = "gemini-2.5-flash-lite"
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
-    print(f"{repo_url} is being flattened...\n")
+
+    print(Fore.GREEN + f">{repo_url} is being flattened...\n")
     with tempfile.NamedTemporaryFile(delete=True) as temp:
         flatr.flatr.main(repo_url=repo_url, output_md=temp.name)
         md_content = read_md(temp.name)
 
-    print(f"{repo_url} converted to flat Markdown and set for Gemini grounding..\n")
+    print(
+        Fore.GREEN
+        + f">{repo_url} converted to flat Markdown and set for Gemini grounding..\n"
+    )
 
     config = GenerateContentConfig(
         system_instruction=[
@@ -39,7 +46,9 @@ def interactive_loop(  # pragma: no cover
 
     client = genai.Client(api_key=api_key)
     chat = client.chats.create(model=model_name, config=config)
-    print("Ask questions about the code (type 'exit' to quit).")
+    print(
+        Style.BRIGHT + Fore.CYAN + "Ask questions about the code (type 'exit' to quit)."
+    )
 
     while True:
         try:
@@ -51,7 +60,7 @@ def interactive_loop(  # pragma: no cover
                 continue
 
             response = chat.send_message(question)
-            print("\n" + response.text + "\n" + "-" * 60)
+            print(Style.BRIGHT + Fore.CYAN + response.text + "\n" + "-" * 60)
         except KeyboardInterrupt:
             print("\nInterrupted. Exiting.")
             break
@@ -59,6 +68,8 @@ def interactive_loop(  # pragma: no cover
 
 def main(argv: List[str]) -> None:  # pragma: no cover
     """Main entry point for the script."""
+    print(Style.BRIGHT + Fore.CYAN + "\n\nStarting explain script...\n")
+
     if len(argv) != 2:
         print("Usage: python -m flatr.explain <path-to-markdown.md>")
         sys.exit(1)
