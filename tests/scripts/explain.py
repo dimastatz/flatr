@@ -22,6 +22,8 @@ def interactive_loop(  # pragma: no cover
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
     client = genai.Client(api_key=api_key)
+    model = client.get_model(model)
+    print(model.generate_content("Explain large language "))
 
     with tempfile.NamedTemporaryFile(delete=True) as temp:
         flatr.flatr.main(repo_url=repo_url, output_md=temp.name)
