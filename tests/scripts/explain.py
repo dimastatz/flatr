@@ -18,13 +18,18 @@ def read_md(md_path: str) -> str:  # pragma: no cover
 
 
 def interactive_loop(  # pragma: no cover
-    repo_url: str, api_key: str, model: str = "gemini-2.5-flash-lite"
+    repo_url: str, api_key: str, model_name: str = "gemini-2.5-flash-lite"
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
-    client = genai.Client(api_key=api_key)
-    model = client.get_model(model)
-    print(model.generate_content("Explain large language "))
+    print('Starting interactive Q&A loop. Type "exit" to quit.\n')
 
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model=model_name, 
+        contents="Hello, Gemini!"
+    )
+    print(f"Model response test: {response.text}\n")
+    
     with tempfile.NamedTemporaryFile(delete=True) as temp:
         flatr.flatr.main(repo_url=repo_url, output_md=temp.name)
         md_content = read_md(temp.name)
@@ -38,9 +43,9 @@ def interactive_loop(  # pragma: no cover
         ]
     )
 
+    chat = client.chats.create(model=model_name, config=config)
     print("Ask questions about the code (type 'exit' to quit).")
 
-    messages: List[Dict[str, Any]] = []
     while True:
         try:
             question = input("> ").strip()
@@ -50,13 +55,8 @@ def interactive_loop(  # pragma: no cover
             if not question:
                 continue
 
-            messages.append({"role": "user", "content": [{"text": question}]})
-            response = client.models.generate_content(
-                model=model, contents=messages, config=config
-            )  # Warm up the model
-
+            response = chat.send_message(question)
             print("\n" + response.text + "\n" + "-" * 60)
-            messages.append({"role": "model", "content": [{"text": response.text}]})
         except KeyboardInterrupt:
             print("\nInterrupted. Exiting.")
             break
