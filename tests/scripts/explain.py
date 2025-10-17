@@ -4,7 +4,7 @@ import sys
 import tempfile
 from urllib.parse import urlparse
 
-from typing import List, Dict, Any
+from typing import List
 from google import genai
 from google.genai.types import GenerateContentConfig
 
@@ -21,18 +21,12 @@ def interactive_loop(  # pragma: no cover
     repo_url: str, api_key: str, model_name: str = "gemini-2.5-flash-lite"
 ) -> None:
     """Run an interactive Q&A loop grounded in the Markdown file."""
-    print('Starting interactive Q&A loop. Type "exit" to quit.\n')
-
-    client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model=model_name, 
-        contents="Hello, Gemini!"
-    )
-    print(f"Model response test: {response.text}\n")
-    
+    print(f"{repo_url} is being flattened...\n")
     with tempfile.NamedTemporaryFile(delete=True) as temp:
         flatr.flatr.main(repo_url=repo_url, output_md=temp.name)
         md_content = read_md(temp.name)
+
+    print(f"{repo_url} converted to flat Markdown and set for Gemini grounding..\n")
 
     config = GenerateContentConfig(
         system_instruction=[
@@ -43,6 +37,7 @@ def interactive_loop(  # pragma: no cover
         ]
     )
 
+    client = genai.Client(api_key=api_key)
     chat = client.chats.create(model=model_name, config=config)
     print("Ask questions about the code (type 'exit' to quit).")
 
