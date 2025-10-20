@@ -1,7 +1,7 @@
 <div align="center">
 <h1 align="center"> Flatr </h1> 
 <h3>Flatten GitHub Repos into Markdown for LLM-Friendly Code Exploration</br></h3>
-<img src="https://img.shields.io/badge/Progress-80%25-red"> <img src="https://img.shields.io/badge/Feedback-Welcome-green">
+<img src="https://img.shields.io/badge/Progress-100%25-green"> <img src="https://img.shields.io/badge/Feedback-Welcome-blue">
 </br>
 </br>
 <img src="https://github.com/dimastatz/flatr/blob/main/docs/flatr_logo.png?raw=true" width="256px"> 
