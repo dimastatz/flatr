@@ -32,9 +32,12 @@ By converting a repository into a **flattened Markdown**, flatr ensures that the
 
 ---
 
-## ⚡ Features
-[![Watch the video](https://i9.ytimg.com/vi_webp/kJaJA_Hxd70/mq2.webp?sqp=CLik18cG&rs=AOn4CLB85kd3XcToH_53AZumQfyQw5ljXQ)](https://youtu.be/kJaJA_Hxd70)
+<a href="https://youtu.be/kJaJA_Hxd70" align="center">
+    <text align="center">🎬 Watch on YouTube</text> <br>
+  <img src="https://i9.ytimg.com/vi_webp/kJaJA_Hxd70/mq2.webp?sqp=CLik18cG&rs=AOn4CLB85kd3XcToH_53AZumQfyQw5ljXQ" width="400" />
+</a>
 
+## ⚡ Features
 
 * Fetch any public GitHub repository by URL.
 * Flatten repository structure into a single Markdown file.
