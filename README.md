@@ -13,7 +13,7 @@
 
 <a href="https://youtu.be/kJaJA_Hxd70" align="center">
     <text align="center">🎬 Watch on YouTube</text> <br>
-  <img src="https://i9.ytimg.com/vi_webp/kJaJA_Hxd70/mq2.webp?sqp=CLik18cG&rs=AOn4CLB85kd3XcToH_53AZumQfyQw5ljXQ" width="512" />
+  <img src="./docs/imgs/link_video.png" width="512" />
 </a>
 <br/>
 
